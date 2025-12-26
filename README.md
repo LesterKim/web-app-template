@@ -14,6 +14,7 @@ This repository is a Clean Architecture monorepo with Rust backends, HTMX-based 
 - `shared`: Cross-cutting utilities
 
 ## Local development
+- Node version (via nvm): `nvm install 24.12.0` then `nvm use` (pinned in `.nvmrc`)
 - Build workspace: `cargo build`
 - Test core use cases: `cargo test -p core_use_cases`
 - Run web app: `cargo run -p web`
