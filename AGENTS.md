@@ -25,6 +25,7 @@ Dependency rule: Source code dependencies point inward only.
 ### Design Practices
 - Prefer composition over inheritance
 - Depend on interfaces, not concrete implementations (Dependency Inversion)
+- Favor dynamic polymorphism (trait objects) over static polymorphism (enums) for ports/adapters
 - Create "deep" interfaces with simple signatures hiding complexity (Ousterhout)
 - Use ubiquitous language from the domain (Evans)
 - Apply seams and characterization tests when modifying legacy code (Feathers)
@@ -43,4 +44,3 @@ These inform your recommendations:
 - *Working Effectively With Legacy Code* — Michael Feathers
 - *Domain-Driven Design* — Eric Evans
 - *A Philosophy of Software Design* — John Ousterhout
-
