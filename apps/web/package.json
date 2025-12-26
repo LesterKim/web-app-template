@@ -1,0 +1,17 @@
+{
+  "name": "web-assets",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/app.css -o ./static/app.css --minify",
+    "build:js": "tsc -p ./tsconfig.json",
+    "build": "npm run build:css && npm run build:js",
+    "watch:css": "tailwindcss -i ./assets/app.css -o ./static/app.css --watch",
+    "watch:js": "tsc -p ./tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.2"
+  }
+}

@@ -1,0 +1,3 @@
+name = "sample-evals"
+threshold = 0.8
+metric = "exact_match"

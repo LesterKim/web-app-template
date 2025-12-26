@@ -1,0 +1,12 @@
+[workspace]
+members = [
+  "core/entities",
+  "core/ports",
+  "core/use_cases",
+  "shared",
+  "datastore",
+  "apps/web",
+  "pipelines/sample_pipeline",
+  "ai/evals",
+]
+resolver = "2"

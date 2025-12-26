@@ -1,0 +1,9 @@
+[package]
+name = "core_use_cases"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+core_entities = { path = "../entities" }
+core_ports = { path = "../ports" }

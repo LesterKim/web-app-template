@@ -1,0 +1,2 @@
+{"input":"hello","expected":"hello"}
+{"input":"goodbye","expected":"farewell"}

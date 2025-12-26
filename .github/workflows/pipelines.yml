@@ -1,0 +1,20 @@
+name: pipelines
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pipelines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Test core use cases
+        run: cargo test -p core_use_cases
+      - name: Test pipelines
+        run: cargo test -p sample_pipeline
+      - name: Run evals
+        run: cargo run -p ai_evals

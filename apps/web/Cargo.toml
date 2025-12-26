@@ -1,0 +1,15 @@
+[package]
+name = "web"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+axum = "0.7"
+askama = "0.12"
+core_entities = { path = "../../core/entities" }
+core_ports = { path = "../../core/ports" }
+core_use_cases = { path = "../../core/use_cases" }
+datastore = { path = "../../datastore" }
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.5", features = ["fs"] }
