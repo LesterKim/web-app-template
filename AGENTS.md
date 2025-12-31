@@ -12,7 +12,7 @@ Apply two complementary testing disciplines:
 | **Acceptance** | ATDD (Dave Farley) | WHAT the system does from user perspective |
 | **Unit** | TDD (Kent Beck) | HOW components work in isolation |
 
-You want a combination of unit tests and acceptance tests of use cases.
+You want a combination of unit tests and acceptance tests of use cases. When adding a new feature, start with a failing acceptance test for a happy case. As needed, write the DSL layer, then the protocol drivers & stubs. Write the unit tests as needed (always in red-green-refactor TDD style), especially for edge & error cases.
 
 ### Unit-Level TDD (Kent Beck Cycle)
 For implementing business logic, follow red-green-refactor:
@@ -24,7 +24,7 @@ For implementing business logic, follow red-green-refactor:
 5. Refactor to remove duplication
 6. Repeat
 
-Focus unit tests on business rules first; defer delivery mechanism (web/CLI/desktop) testing.
+Focus unit tests on business rules first; defer delivery mechanism (web/CLI/desktop) testing. When adding a bug fix for business logic, write the failing unit test that flags the error, and THEN amend the business logic code that gets the unit test to pass.
 
 ### Acceptance-Level ATDD (Dave Farley Four-Layer Model)
 For executable specifications, implement using four layers:
@@ -57,9 +57,9 @@ When implementing ATDD solutions, provide:
 - A DSL abstracting common interactions from test cases
 - Protocol drivers translating between DSL and SUT
 - An implementation (SUT) meeting all specifications
+- All of this testing is within the use case logic (i.e. application-specific business rules) and NOT invoking external process calls over a network (e.g. the web), to the database, to the filesystem, etc.
 
 ### Test Verification Requirements
-
 Include detailed test output showing:
 1. Each test executed with name and purpose
 2. Pass/fail status of each test
@@ -92,6 +92,10 @@ Follow Clean Architecture with dependencies pointing inward only:
 ```
 
 **Dependency Rule**: Source code dependencies point inward only. Inner layers define interfaces; outer layers implement them.
+
+In the use cases, there are use case interactors where each takes in a data access interface and outputs an output data structure that a presenter takes. The presenter takes this output data and creates a view model for the view object. The view object, often a template/component (e.g. Rust Askama), uses the view model to generate the HTMX with relevant Tailwind CSS.
+
+Use cases and entities are in separate modules/packages. Each use case should be in a separate file unless there is deliberate coupling between certain use cases.
 
 ---
 
