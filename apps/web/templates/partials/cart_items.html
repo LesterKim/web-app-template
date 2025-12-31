@@ -1,0 +1,39 @@
+{% if vm.is_empty %}
+<div class="border border-gray-200 rounded-lg p-6 text-center">
+  <h2 class="text-xl font-semibold">No items yet</h2>
+  <p class="text-gray-600">Add food boxes or accessories to start your order.</p>
+  <a class="button" href="/catalog">Browse catalog</a>
+</div>
+{% else %}
+<div class="border border-gray-200 rounded-lg p-6 space-y-4">
+  <div class="grid grid-cols-5 gap-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    <span>Item</span>
+    <span>Category</span>
+    <span>Unit</span>
+    <span>Qty</span>
+    <span>Total</span>
+  </div>
+  {% for item in vm.items %}
+  <div class="grid grid-cols-5 gap-4 items-center border-t border-gray-200 pt-4 text-sm">
+    <span class="font-semibold text-gray-900">{{ item.name }}</span>
+    <span class="text-gray-600">{{ item.category }}</span>
+    <span class="text-gray-600">{{ item.unit_price }}</span>
+    <span>
+      <form method="post" action="/cart/update" class="flex items-center gap-3" hx-post="/cart/update" hx-target="#cart-content" hx-swap="innerHTML">
+        <input type="hidden" name="product_id" value="{{ item.product_id }}" />
+        <input class="input w-20" name="quantity" type="number" min="0" value="{{ item.quantity }}" />
+        <button class="button ghost" type="submit">Update</button>
+      </form>
+    </span>
+    <span class="font-semibold text-gray-900">{{ item.line_total }}</span>
+  </div>
+  {% endfor %}
+</div>
+<div class="border border-gray-200 rounded-lg p-6 flex items-center justify-between gap-4">
+  <div>
+    <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">Subtotal</p>
+    <h2 class="text-2xl font-semibold text-gray-900">{{ vm.subtotal }}</h2>
+  </div>
+  <a class="button" href="/quote">Get quote</a>
+</div>
+{% endif %}

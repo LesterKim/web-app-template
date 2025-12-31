@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>Submitted quotes</h1>
+    <p class="lead">Review every quote you've generated from your cart.</p>
+  </div>
+  <a class="button secondary" href="/catalog">Start a new order</a>
+</section>
+
+{% if vm.is_empty %}
+<div class="border border-gray-200 rounded-lg p-6 text-center">
+  <h2 class="text-xl font-semibold">No quotes yet</h2>
+  <p class="text-gray-600">Generate a quote from your cart to see it listed here.</p>
+  <a class="button" href="/cart">Go to cart</a>
+</div>
+{% else %}
+<div class="border border-gray-200 rounded-lg p-6 space-y-4">
+  <div class="grid grid-cols-3 gap-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    <span>Quote</span>
+    <span>Items</span>
+    <span>Total</span>
+  </div>
+  {% for quote in vm.quotes %}
+  <div class="grid grid-cols-3 gap-4 items-center border-t border-gray-200 pt-4 text-sm">
+    <a class="font-semibold text-blue-700 hover:underline" href="/quotes/{{ quote.quote_id }}">#{{ quote.quote_id }}</a>
+    <span class="text-gray-600">{{ quote.item_count }}</span>
+    <span class="font-semibold text-gray-900">{{ quote.total }}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

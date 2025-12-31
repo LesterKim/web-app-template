@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>Your quote</h1>
+    <p class="lead">Review totals, then confirm to generate the invoice email.</p>
+  </div>
+  <a class="button secondary" href="/cart">Back to cart</a>
+</section>
+
+<div class="border border-gray-200 rounded-lg p-6 space-y-4">
+  <div class="grid grid-cols-5 gap-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
+    <span>Item</span>
+    <span>Category</span>
+    <span>Unit</span>
+    <span>Qty</span>
+    <span>Total</span>
+  </div>
+  {% for item in vm.items %}
+  <div class="grid grid-cols-5 gap-4 items-center border-t border-gray-200 pt-4 text-sm">
+    <span class="font-semibold text-gray-900">{{ item.name }}</span>
+    <span class="text-gray-600">{{ item.category }}</span>
+    <span class="text-gray-600">{{ item.unit_price }}</span>
+    <span class="text-gray-600">{{ item.quantity }}</span>
+    <span class="font-semibold text-gray-900">{{ item.line_total }}</span>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+  <div class="border border-gray-200 rounded-lg p-6 grid gap-4">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">Subtotal</p>
+      <h3 class="text-lg font-semibold text-gray-900">{{ vm.subtotal }}</h3>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">Service fee</p>
+      <h3 class="text-lg font-semibold text-gray-900">{{ vm.fee }}</h3>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">NYC tax</p>
+      <h3 class="text-lg font-semibold text-gray-900">{{ vm.tax }}</h3>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">Total</p>
+      <h2 class="text-2xl font-semibold text-gray-900">{{ vm.total }}</h2>
+    </div>
+  </div>
+  <form method="post" action="/confirm" class="border border-gray-200 rounded-lg p-6 grid gap-3 bg-gray-50">
+    <h2 class="text-xl font-semibold">Ready to confirm?</h2>
+    <p class="text-gray-600">We'll create the invoice and send a mock email confirmation.</p>
+    <button class="button" type="submit">Confirm &amp; email invoice</button>
+  </form>
+</div>
+{% endblock %}

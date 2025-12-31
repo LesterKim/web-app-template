@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>Invoice confirmed</h1>
+    <p class="lead">Your mock invoice has been created and emailed.</p>
+  </div>
+  <a class="button secondary" href="/catalog">Start a new order</a>
+</section>
+
+<div class="card invoice">
+  <div>
+    <p class="eyebrow">Invoice number</p>
+    <h2>#{{ vm.invoice_id }}</h2>
+  </div>
+  <div>
+    <p class="eyebrow">Total due</p>
+    <h2>{{ vm.total }}</h2>
+  </div>
+  <div>
+    <p class="eyebrow">Sent to</p>
+    <p class="invoice-email">{{ vm.email }}</p>
+  </div>
+</div>
+{% endblock %}

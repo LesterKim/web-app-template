@@ -3,15 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% block title %}Web App{% endblock %}</title>
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/app.css" />
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
     <script type="module" src="/static/app.js"></script>
   </head>
-  <body class="min-h-screen bg-slate-950 text-slate-100">
-    <div class="mx-auto max-w-3xl px-6 py-12">
-      {% block content %}{% endblock %}
+  <body>
+    <div class="page">
+      <header class="nav">
+        <div class="brand">
+          <span class="brand-mark">NYC</span>
+          <span class="brand-name">Pantry Collective</span>
+        </div>
+        <div class="nav-links">
+          {% if let Some(name) = layout.employee_name %}
+          <span class="nav-greeting">Welcome, {{ name }}</span>
+          <a class="nav-link" href="/catalog">Catalog</a>
+          <a class="nav-link" href="/cart" id="cart-count-link">Cart ({{ layout.cart_count }})</a>
+          <a class="nav-link" href="/quote">Quote</a>
+          <a class="nav-link" href="/quotes">Quotes</a>
+          <form method="post" action="/signout">
+            <button class="button ghost" type="submit">Sign out</button>
+          </form>
+          {% else %}
+          <a class="nav-link" href="/signin">Sign in</a>
+          <a class="button" href="/signup">Create account</a>
+          {% endif %}
+        </div>
+      </header>
+      <main class="content" id="main-content">
+        {% block content %}{% endblock %}
+      </main>
+      <footer class="footer">
+        <p>Mock storefront for NYC public school staff ordering meals and accessories.</p>
+      </footer>
     </div>
   </body>
 </html>

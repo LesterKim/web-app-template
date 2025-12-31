@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>Order catalog</h1>
+    <p class="lead">Build a mix of food items and accessories for your campus.</p>
+  </div>
+  <div class="callout card">
+    <p class="eyebrow">Pricing note</p>
+    <p>Quotes include a $4.95 service fee plus 8.875% NYC tax.</p>
+  </div>
+</section>
+
+{% if let Some(error) = vm.error %}
+<div class="banner error">{{ error }}</div>
+{% endif %}
+
+<div id="catalog-messages"></div>
+<section class="product-grid">
+  {% for product in vm.products %}
+  <form class="card product-card" method="post" action="/cart/add" hx-post="/cart/add" hx-target="#cart-count-link" hx-swap="outerHTML" hx-indicator="#loading-{{ product.id }}">
+    <input type="hidden" name="product_id" value="{{ product.id }}" />
+    <div class="product-top">
+      <span class="pill">{{ product.category }}</span>
+      <span class="price">{{ product.price }}</span>
+    </div>
+    <h3>{{ product.name }}</h3>
+    <div class="product-actions">
+      <label class="qty">
+        <span>Qty</span>
+        <input class="input" name="quantity" type="number" min="1" value="1" />
+      </label>
+      <button class="button" type="submit">
+        <span id="loading-{{ product.id }}" class="htmx-indicator">Adding...</span>
+        <span>Add to cart</span>
+      </button>
+    </div>
+  </form>
+  {% endfor %}
+</section>
+{% endblock %}

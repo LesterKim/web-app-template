@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">NYC PUBLIC SCHOOL EMPLOYEE ORDERING</p>
+    <h1>Build a pantry order that keeps your students fueled.</h1>
+    <p class="lead">
+      Order fresh food boxes and durable accessories in one place. Quotes include a flat
+      service fee plus NYC tax, and confirmations generate an invoice emailed to you.
+    </p>
+    <div class="hero-actions">
+      <a class="button" href="/signup">Start an order</a>
+      <a class="button secondary" href="/signin">Sign in</a>
+    </div>
+    <div class="hero-meta">
+      <div class="pill">Seasonal food packs</div>
+      <div class="pill">Classroom-ready accessories</div>
+      <div class="pill">Mock invoice email</div>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="card-header">
+      <h2>Today’s mock specials</h2>
+      <p>Curated for citywide campuses.</p>
+    </div>
+    <ul class="feature-list">
+      <li>
+        <span class="feature-title">Harvest Salad Box</span>
+        <span class="feature-note">Ready-to-serve greens + grains.</span>
+      </li>
+      <li>
+        <span class="feature-title">Brooklyn Bento Set</span>
+        <span class="feature-note">Portioned favorites with protein.</span>
+      </li>
+      <li>
+        <span class="feature-title">Teacher Travel Mug</span>
+        <span class="feature-note">Insulated and spill-ready.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

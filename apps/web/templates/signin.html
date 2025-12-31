@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth">
+  <div class="auth-panel card">
+    <h1>Welcome back</h1>
+    <p class="lead">Sign in to continue your pantry order.</p>
+    {% if let Some(error) = vm.error %}
+    <div class="banner error">{{ error }}</div>
+    {% endif %}
+    <form method="post" action="/signin" class="form">
+      <label class="field">
+        <span>Email</span>
+        <input class="input" name="email" type="email" required />
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input class="input" name="password" type="password" required />
+      </label>
+      <button class="button" type="submit">Sign in</button>
+    </form>
+    <p class="helper">
+      New to the collective? <a href="/signup">Create an account.</a>
+    </p>
+  </div>
+  <div class="auth-aside card">
+    <h2>Quick ordering tips</h2>
+    <ul>
+      <li>Adjust quantities in your cart.</li>
+      <li>Quotes show fee and NYC tax.</li>
+      <li>Confirm to generate the invoice email.</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

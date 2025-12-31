@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>{{ vm.title }}</h1>
+    <p class="lead">We hit a snag while preparing your order.</p>
+  </div>
+</section>
+
+<div class="card error-card">
+  <p>{{ vm.message }}</p>
+  <a class="button secondary" href="/catalog">Back to catalog</a>
+</div>
+{% endblock %}
