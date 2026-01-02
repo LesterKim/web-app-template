@@ -1,0 +1,21 @@
+<div id="cart-items" class="stack">
+  {% if let Some(error) = vm.cart_error %}
+  <p class="alert">{{ error }}</p>
+  {% endif %}
+
+  {% if vm.cart_items.is_empty() %}
+  <div class="muted">Your cart is empty. Add a catalog item to start a quote.</div>
+  {% else %}
+  <ul class="list">
+    {% for item in vm.cart_items %}
+    <li class="list-item">
+      <div>{{ item.description }}</div>
+      <div class="muted" style="margin-top: 8px; display: flex; justify-content: space-between;">
+        <span>{{ item.quantity }} units @ {{ item.price }}</span>
+        <span>{{ item.line_total }}</span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>

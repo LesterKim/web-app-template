@@ -1,0 +1,103 @@
+<div id="sign-up-form" class="card stack">
+  {% if let Some(success) = vm.success %}
+  <p class="notice">{{ success }}</p>
+  {% endif %}
+  {% if let Some(error) = vm.error %}
+  <p class="alert">{{ error }}</p>
+  {% endif %}
+
+  <form
+    class="stack"
+    method="post"
+    action="/ordering/sign-up"
+    hx-post="/ordering/sign-up"
+    hx-target="#sign-up-form"
+    hx-swap="outerHTML"
+  >
+    <div class="grid grid-2">
+      <label class="label">
+        First name
+        <input
+          type="text"
+          name="first_name"
+          value="{{ vm.form.first_name }}"
+          required
+          class="input"
+        />
+      </label>
+      <label class="label">
+        Last name
+        <input
+          type="text"
+          name="last_name"
+          value="{{ vm.form.last_name }}"
+          required
+          class="input"
+        />
+      </label>
+    </div>
+    <label class="label">
+      Title
+      <input
+        type="text"
+        name="title"
+        value="{{ vm.form.title }}"
+        required
+        class="input"
+      />
+    </label>
+    <label class="label">
+      School
+      <select name="school" required class="input">
+        <option value="">Select your school</option>
+        {% for school in vm.schools %}
+        <option value="{{ school.name }}" {% if school.name == vm.form.school %}selected{% endif %}>
+          {{ school.name }}
+        </option>
+        {% endfor %}
+      </select>
+    </label>
+    <label class="label">
+      School email
+      <input
+        type="email"
+        name="email"
+        value="{{ vm.form.email }}"
+        required
+        class="input"
+      />
+    </label>
+    <label class="label">
+      Phone
+      <input
+        type="text"
+        name="phone"
+        value="{{ vm.form.phone }}"
+        required
+        class="input"
+      />
+    </label>
+    <label class="label">
+      Delivery window
+      <input
+        type="text"
+        name="delivery_window"
+        value="{{ vm.form.delivery_window }}"
+        required
+        class="input"
+      />
+    </label>
+    <label class="label">
+      Password
+      <input
+        type="password"
+        name="password"
+        value="{{ vm.form.password }}"
+        required
+        class="input"
+      />
+      <span class="muted" style="font-size: 12px;">Must be longer than 16 characters.</span>
+    </label>
+    <button type="submit" class="button button-success">Create account</button>
+  </form>
+</div>

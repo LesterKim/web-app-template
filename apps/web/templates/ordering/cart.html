@@ -1,0 +1,88 @@
+{% extends "ordering/base.html" %}
+
+{% block title %}{{ vm.title }} · NYC DOE Ordering{% endblock %}
+
+{% block header %}
+<header class="header">
+  <div class="row">
+    <div>
+      <p class="kicker">NYC DOE Ordering</p>
+      <h1 class="headline">{{ vm.title }}</h1>
+    </div>
+    <form method="post" action="/ordering/sign-out">
+      <button type="submit" class="button">Sign out</button>
+    </form>
+  </div>
+  <p class="subhead">Signed in as {{ vm.employee_email }}</p>
+  {% if let Some(message) = vm.message %}
+  <p class="notice">{{ message }}</p>
+  {% endif %}
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="grid grid-2">
+  <div class="stack">
+    <div class="card stack">
+      <div>
+        <h2 style="margin: 0 0 8px;">Catalog</h2>
+        <p class="muted">Select an item and quantity to add to your cart.</p>
+      </div>
+      <div class="stack">
+        {% for item in vm.catalog_items %}
+        <form
+          class="list-item"
+          method="post"
+          action="/ordering/cart/add"
+          hx-post="/ordering/cart/add"
+          hx-target="#cart-items"
+          hx-swap="outerHTML"
+        >
+          <input type="hidden" name="description" value="{{ item.description }}" />
+          <div class="row">
+            <div>
+              <div>{{ item.description }}</div>
+              <div class="muted" style="font-size: 12px;">{{ item.price }} per unit</div>
+            </div>
+            <div class="row" style="justify-content: flex-end; gap: 8px;">
+              <input
+                type="number"
+                name="quantity"
+                min="1"
+                value="1"
+                class="input input-compact"
+              />
+              <button type="submit" class="button button-primary">Add</button>
+            </div>
+          </div>
+        </form>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div class="row">
+        <h2 style="margin: 0;">Cart</h2>
+        <a href="/ordering/quote" class="button">Review quote →</a>
+      </div>
+      {% include "ordering/partials/cart_items.html" %}
+    </div>
+  </div>
+
+  <div class="stack">
+    <div
+      hx-get="/ordering/quote/preview"
+      hx-trigger="load, cart-updated from:body"
+      hx-swap="outerHTML"
+    >
+      {% include "ordering/partials/quote_preview.html" %}
+    </div>
+    <div class="card">
+      <p class="muted">
+        Quotes include tax (8.875%) and a fixed 1% delivery charge. Submit when you are ready
+        and the invoice will be emailed automatically.
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

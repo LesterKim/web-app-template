@@ -1,5 +1,6 @@
 mod config;
 mod http;
+mod ordering;
 mod presenters;
 mod routes;
 mod view_models;
@@ -22,7 +23,8 @@ async fn main() {
         }
     };
 
-    let state = http::AppState::new(repo);
+    let ordering_state = ordering::OrderingState::new();
+    let state = http::AppState::new(repo, ordering_state);
     let app = http::router(state);
 
     let listener = tokio::net::TcpListener::bind(&config.addr)

@@ -862,6 +862,7 @@ dependencies = [
  "core_ports",
  "core_use_cases",
  "datastore",
+ "serde",
  "tokio",
  "tower-http",
 ]

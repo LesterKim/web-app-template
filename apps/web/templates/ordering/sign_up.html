@@ -1,0 +1,30 @@
+{% extends "ordering/base.html" %}
+
+{% block title %}{{ vm.title }} · NYC DOE Ordering{% endblock %}
+
+{% block header %}
+<header class="header">
+  <p class="kicker">NYC DOE Ordering</p>
+  <h1 class="headline">{{ vm.title }}</h1>
+  <p class="subhead">{{ vm.subtitle }}</p>
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="grid grid-2">
+  {% include "ordering/partials/sign_up_form.html" %}
+  <div class="card stack">
+    <h2>Why we verify</h2>
+    <p class="muted">
+      Orders are validated against NYC DOE procurement rules. Use a
+      <strong>schools.nyc.gov</strong> email so we can route invoices to your school.
+    </p>
+    <ul class="stack" style="gap: 8px;">
+      <li class="muted">Tax and shipping are calculated automatically.</li>
+      <li class="muted">Delivery windows are honored for scheduling.</li>
+      <li class="muted">Quotes convert to invoices with one click.</li>
+    </ul>
+    <a href="/ordering/sign-in" class="button">Already have an account? →</a>
+  </div>
+</section>
+{% endblock %}

@@ -3,25 +3,26 @@
 {% block title %}{{ vm.title }}{% endblock %}
 
 {% block content %}
-<main class="space-y-8">
-  <header class="space-y-2">
-    <p class="text-sm uppercase tracking-[0.3em] text-slate-400">Clean Architecture</p>
-    <h1 class="text-4xl font-semibold">{{ vm.title }}</h1>
-    <p class="text-slate-300">
+<main class="stack">
+  <header class="stack" style="gap: 8px;">
+    <p class="kicker">Clean Architecture</p>
+    <h1 class="headline">{{ vm.title }}</h1>
+    <p class="muted">
       Use cases deliver output to a presenter, which builds this view model for HTMX.
     </p>
+    <a class="button" href="/ordering">NYC DOE Ordering Demo →</a>
   </header>
 
   {% if vm.greetings.is_empty() %}
-  <div class="rounded-xl border border-slate-800 bg-slate-900/50 p-6">
-    <p class="text-slate-300">{{ vm.empty_message }}</p>
+  <div class="card">
+    <p class="muted">{{ vm.empty_message }}</p>
   </div>
   {% else %}
-  <ul class="space-y-3">
+  <ul class="list">
     {% for item in vm.greetings %}
-    <li class="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
-      <div class="text-xs uppercase tracking-[0.25em] text-slate-400">#{{ item.id }}</div>
-      <div class="text-lg text-slate-100">{{ item.message }}</div>
+    <li class="list-item">
+      <div class="kicker">#{{ item.id }}</div>
+      <div>{{ item.message }}</div>
     </li>
     {% endfor %}
   </ul>

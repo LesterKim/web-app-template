@@ -3,6 +3,7 @@ use std::future::Future;
 use std::pin::Pin;
 
 pub mod output_boundary;
+pub mod ordering;
 
 pub type BoxFuture<'a, T> = Pin<Box<dyn Future<Output = T> + Send + 'a>>;
 

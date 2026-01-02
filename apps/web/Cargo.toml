@@ -11,5 +11,6 @@ core_entities = { path = "../../core/entities" }
 core_ports = { path = "../../core/ports" }
 core_use_cases = { path = "../../core/use_cases" }
 datastore = { path = "../../datastore" }
+serde = { version = "1", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
 tower-http = { version = "0.5", features = ["fs"] }

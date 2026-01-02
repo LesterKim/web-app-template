@@ -1,0 +1,56 @@
+{% extends "ordering/base.html" %}
+
+{% block title %}{{ vm.title }} · NYC DOE Ordering{% endblock %}
+
+{% block header %}
+<header class="header">
+  <div class="row">
+    <div>
+      <p class="kicker">NYC DOE Ordering</p>
+      <h1 class="headline">{{ vm.title }}</h1>
+    </div>
+    <a href="/ordering/cart" class="button">Back to cart</a>
+  </div>
+  <p class="subhead">Signed in as {{ vm.employee_email }}</p>
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="card stack">
+  {% if let Some(error) = vm.error %}
+  <p class="alert">{{ error }}</p>
+  {% endif %}
+
+  {% if let Some(quote) = vm.quote %}
+  <div class="row">
+    <div>
+      <p class="kicker">Quote number</p>
+      <p style="font-size: 22px; font-weight: 600; margin: 6px 0;">{{ quote.number }}</p>
+    </div>
+    <form method="post" action="/ordering/quote/submit">
+      <button type="submit" class="button button-success">Submit quote</button>
+    </form>
+  </div>
+
+  <ul class="list">
+    {% for item in quote.line_items %}
+    <li class="list-item">
+      <div>{{ item.description }}</div>
+      <div class="muted" style="margin-top: 8px; display: flex; justify-content: space-between;">
+        <span>{{ item.quantity }} @ {{ item.price }}</span>
+        <span>{{ item.line_total }}</span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="stack" style="gap: 8px;">
+    <div class="total-row"><span>Subtotal</span><span>{{ quote.subtotal }}</span></div>
+    <div class="total-row"><span>Tax</span><span>{{ quote.tax }}</span></div>
+    <div class="total-row"><span>Shipping</span><span>{{ quote.shipping }}</span></div>
+    <div class="total-row"><strong>Total</strong><strong>{{ quote.total }}</strong></div>
+  </div>
+  <p class="muted">Delivery window: {{ quote.delivery_window }}</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -22,6 +22,8 @@ pub struct ListGreetingsInteractor<'a> {
     presenter: &'a dyn GreetingOutputBoundary,
 }
 
+pub mod ordering;
+
 impl<'a> ListGreetingsInteractor<'a> {
     pub fn new(
         repo: &'a dyn GreetingRepository,

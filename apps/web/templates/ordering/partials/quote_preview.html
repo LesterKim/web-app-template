@@ -1,0 +1,35 @@
+<div id="quote-preview" class="card stack">
+  <div class="row">
+    <h3 style="margin: 0;">Quote preview</h3>
+    {% if let Some(quote) = vm.quote %}
+    <span class="kicker">{{ quote.number }}</span>
+    {% endif %}
+  </div>
+
+  {% if let Some(error) = vm.quote_error %}
+  <p class="alert">{{ error }}</p>
+  {% else %}
+    {% if let Some(quote) = vm.quote %}
+    <div class="stack" style="gap: 12px;">
+      {% for item in quote.line_items %}
+      <div class="row" style="align-items: flex-start;">
+        <div>
+          <div>{{ item.description }}</div>
+          <div class="muted" style="font-size: 12px;">{{ item.quantity }} @ {{ item.price }}</div>
+        </div>
+        <div>{{ item.line_total }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="stack" style="gap: 8px;">
+      <div class="total-row"><span>Subtotal</span><span>{{ quote.subtotal }}</span></div>
+      <div class="total-row"><span>Tax</span><span>{{ quote.tax }}</span></div>
+      <div class="total-row"><span>Shipping</span><span>{{ quote.shipping }}</span></div>
+      <div class="total-row"><strong>Total</strong><strong>{{ quote.total }}</strong></div>
+      <div class="muted" style="padding-top: 4px;">Delivery window: {{ quote.delivery_window }}</div>
+    </div>
+    {% else %}
+    <p class="muted">Add items to preview a quote with totals and delivery window.</p>
+    {% endif %}
+  {% endif %}
+</div>

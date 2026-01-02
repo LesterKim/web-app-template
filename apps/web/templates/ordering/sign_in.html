@@ -1,0 +1,25 @@
+{% extends "ordering/base.html" %}
+
+{% block title %}{{ vm.title }} · NYC DOE Ordering{% endblock %}
+
+{% block header %}
+<header class="header">
+  <p class="kicker">NYC DOE Ordering</p>
+  <h1 class="headline">{{ vm.title }}</h1>
+  <p class="subhead">{{ vm.subtitle }}</p>
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="grid grid-2">
+  {% include "ordering/partials/sign_in_form.html" %}
+  <div class="card stack">
+    <h2>Need an account?</h2>
+    <p class="muted">
+      Verified NYC DOE employees can create an account using their
+      <strong>schools.nyc.gov</strong> email address.
+    </p>
+    <a href="/ordering/sign-up" class="button">Start sign up →</a>
+  </div>
+</section>
+{% endblock %}

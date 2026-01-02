@@ -1,0 +1,39 @@
+<div id="sign-in-form" class="card stack">
+  {% if let Some(message) = vm.message %}
+  <p class="notice">{{ message }}</p>
+  {% endif %}
+  {% if let Some(error) = vm.error %}
+  <p class="alert">{{ error }}</p>
+  {% endif %}
+
+  <form
+    class="stack"
+    method="post"
+    action="/ordering/sign-in"
+    hx-post="/ordering/sign-in"
+    hx-target="#sign-in-form"
+    hx-swap="outerHTML"
+  >
+    <label class="label">
+      Email
+      <input
+        type="email"
+        name="email"
+        value="{{ vm.form.email }}"
+        required
+        class="input"
+      />
+    </label>
+    <label class="label">
+      Password
+      <input
+        type="password"
+        name="password"
+        value="{{ vm.form.password }}"
+        required
+        class="input"
+      />
+    </label>
+    <button type="submit" class="button button-primary">Sign in</button>
+  </form>
+</div>
