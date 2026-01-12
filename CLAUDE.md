@@ -39,6 +39,7 @@ Always show: test name, pass/fail status, relevant assertions. Use `--verbose` f
 ## Design Principles
 - Composition over inheritance
 - Depend on traits, not concrete types
+- Favor dynamic polymorphism over static polymorphism
 - Prefer trait objects for ports/adapters
 - Use domain language (ubiquitous language)
 - Business rules in `core/` have zero framework dependencies
