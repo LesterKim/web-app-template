@@ -73,18 +73,26 @@ impl Employee {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub enum ProductCategory {
-    Food,
-    Accessory,
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub struct ProductCategory {
+    name: String,
 }
 
 impl ProductCategory {
-    pub fn label(&self) -> &'static str {
-        match self {
-            ProductCategory::Food => "Food",
-            ProductCategory::Accessory => "Accessory",
-        }
+    pub fn new(name: impl Into<String>) -> Self {
+        Self { name: name.into() }
+    }
+
+    pub fn food() -> Self {
+        Self::new("Food")
+    }
+
+    pub fn accessory() -> Self {
+        Self::new("Accessory")
+    }
+
+    pub fn label(&self) -> &str {
+        self.name.as_str()
     }
 }
 

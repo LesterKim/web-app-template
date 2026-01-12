@@ -477,13 +477,13 @@ fn list_catalog_returns_products() {
         Product {
             id: ProductId(1),
             name: "Harvest Salad Box".to_string(),
-            category: ProductCategory::Food,
+            category: ProductCategory::food(),
             unit_price: Money::from_cents(1000).unwrap(),
         },
         Product {
             id: ProductId(2),
             name: "Reusable Lunch Tote".to_string(),
-            category: ProductCategory::Accessory,
+            category: ProductCategory::accessory(),
             unit_price: Money::from_cents(1800).unwrap(),
         },
     ];
@@ -494,7 +494,7 @@ fn list_catalog_returns_products() {
 
     assert_eq!(output.items.len(), 2);
     assert_eq!(output.items[0].name, "Harvest Salad Box");
-    assert_eq!(output.items[1].category, ProductCategory::Accessory);
+    assert_eq!(output.items[1].category, ProductCategory::accessory());
 }
 
 #[test]
@@ -502,7 +502,7 @@ fn add_item_to_cart_returns_cart_output() {
     let product = Product {
         id: ProductId(11),
         name: "Harvest Salad Box".to_string(),
-        category: ProductCategory::Food,
+        category: ProductCategory::food(),
         unit_price: Money::from_cents(500).unwrap(),
     };
     let catalog = FakeCatalogRepo::new(vec![product.clone()]);
@@ -528,7 +528,7 @@ fn update_cart_returns_updated_output() {
     let product = Product {
         id: ProductId(21),
         name: "Brooklyn Bento Set".to_string(),
-        category: ProductCategory::Food,
+        category: ProductCategory::food(),
         unit_price: Money::from_cents(400).unwrap(),
     };
     let catalog = FakeCatalogRepo::new(vec![product.clone()]);
@@ -565,7 +565,7 @@ fn view_cart_returns_output() {
     let product = Product {
         id: ProductId(31),
         name: "Teacher Travel Mug".to_string(),
-        category: ProductCategory::Accessory,
+        category: ProductCategory::accessory(),
         unit_price: Money::from_cents(900).unwrap(),
     };
     let catalog = FakeCatalogRepo::new(vec![product.clone()]);
@@ -599,7 +599,7 @@ fn get_quote_details_returns_items_and_totals() {
             QuoteLine {
                 product_id: ProductId(101),
                 name: "Harvest Salad Box".to_string(),
-                category: ProductCategory::Food,
+                category: ProductCategory::food(),
                 unit_price: Money::from_cents(1000).unwrap(),
                 quantity: 2,
                 line_total: Money::from_cents(2000).unwrap(),
@@ -607,7 +607,7 @@ fn get_quote_details_returns_items_and_totals() {
             QuoteLine {
                 product_id: ProductId(102),
                 name: "Teacher Travel Mug".to_string(),
-                category: ProductCategory::Accessory,
+                category: ProductCategory::accessory(),
                 unit_price: Money::from_cents(1500).unwrap(),
                 quantity: 1,
                 line_total: Money::from_cents(1500).unwrap(),
@@ -639,7 +639,7 @@ fn quote_includes_fee_and_tax() {
     let product = Product {
         id: ProductId(1),
         name: "Harvest Salad Box".to_string(),
-        category: ProductCategory::Food,
+        category: ProductCategory::food(),
         unit_price: Money::from_cents(1000).unwrap(),
     };
     let catalog = FakeCatalogRepo::new(vec![product.clone()]);
@@ -678,7 +678,7 @@ fn list_quotes_returns_employee_history() {
             QuoteLine {
                 product_id: ProductId(11),
                 name: "Harvest Salad Box".to_string(),
-                category: ProductCategory::Food,
+                category: ProductCategory::food(),
                 unit_price: Money::from_cents(1000).unwrap(),
                 quantity: 2,
                 line_total: Money::from_cents(2000).unwrap(),
@@ -686,7 +686,7 @@ fn list_quotes_returns_employee_history() {
             QuoteLine {
                 product_id: ProductId(12),
                 name: "Teacher Travel Mug".to_string(),
-                category: ProductCategory::Accessory,
+                category: ProductCategory::accessory(),
                 unit_price: Money::from_cents(1500).unwrap(),
                 quantity: 1,
                 line_total: Money::from_cents(1500).unwrap(),
@@ -704,7 +704,7 @@ fn list_quotes_returns_employee_history() {
         items: vec![QuoteLine {
             product_id: ProductId(13),
             name: "Warm Grain Bowl".to_string(),
-            category: ProductCategory::Food,
+            category: ProductCategory::food(),
             unit_price: Money::from_cents(1200).unwrap(),
             quantity: 3,
             line_total: Money::from_cents(3600).unwrap(),
@@ -721,7 +721,7 @@ fn list_quotes_returns_employee_history() {
         items: vec![QuoteLine {
             product_id: ProductId(14),
             name: "Reusable Lunch Tote".to_string(),
-            category: ProductCategory::Accessory,
+            category: ProductCategory::accessory(),
             unit_price: Money::from_cents(1800).unwrap(),
             quantity: 1,
             line_total: Money::from_cents(1800).unwrap(),
@@ -758,7 +758,7 @@ fn confirm_order_sends_email_and_clears_cart() {
     let product = Product {
         id: ProductId(2),
         name: "Snack Pack".to_string(),
-        category: ProductCategory::Food,
+        category: ProductCategory::food(),
         unit_price: Money::from_cents(750).unwrap(),
     };
     let catalog = FakeCatalogRepo::new(vec![product.clone()]);

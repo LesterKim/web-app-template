@@ -48,22 +48,19 @@ impl AppState {
 }
 
 fn static_dir() -> PathBuf {
-    // Try to find static directory relative to current working directory
-    // This works whether running from workspace root or apps/web
-    let paths = vec![
-        "apps/web/static",
-        "static",
-        "../static",
-    ];
-    
+    let manifest_static = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("static");
+    if manifest_static.exists() && manifest_static.is_dir() {
+        return manifest_static;
+    }
+
+    let paths = ["apps/web/static", "static", "../static"];
     for path in paths {
-        let p = PathBuf::from(path);
-        if p.exists() && p.is_dir() {
-            return p;
+        let candidate = PathBuf::from(path);
+        if candidate.exists() && candidate.is_dir() {
+            return candidate;
         }
     }
-    
-    // Fallback to default
+
     PathBuf::from("apps/web/static")
 }
 
